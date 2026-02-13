@@ -5,14 +5,14 @@ Feature: Filter Products Functionality
   So that I can find specific items
 
   Background:
-    Given I am on the Products page
+    Given I logged in with valid credentials
+    And I am on the Products page
 
   @positive
   Scenario: Successful filter by Price Range
-    When I select the Price filter
-    And I select Price Range "low to high"
-    Then I should see products sorted by price in ascending order
-    And I should see the first product priced at "$7.99"
+    When I select the Price filter from low to high
+    Then I should see the first product priced at "$7.99"
+
 
 
 

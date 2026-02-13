@@ -6,24 +6,42 @@ import { Locator, Page } from '@playwright/test'
  */
 export class ProductsPage {
   readonly page: Page
-  readonly productHeading: Locator
+  readonly filterDropdown: Locator
+  readonly productPrices: Locator
 
   constructor(page: Page) {
     this.page = page
-    this.productHeading = page.getByTestId('title')
+    this.filterDropdown = page.getByRole('combobox')
+    this.productPrices = page.locator('[data-test^="inventory-item-price"]')
   }
 
-  async goto() {
-    await this.page.goto('/')
+  /**
+   * Select sort option from filter dropdown
+   * @param value - option value (az, za, lohi, hilo)
+   */
+  async selectFilter(value: string) {
+    await this.filterDropdown.selectOption(value)
   }
 
-  async getProductHeading(): Promise<string> {
-    return (await this.productHeading.textContent()) ?? ''
+  /**
+   * Select price low to high
+   */
+  async sortLowToHigh() {
+    await this.filterDropdown.selectOption('lohi')
   }
 
-  async isOnProductPage(): Promise<boolean> {
-    await this.productHeading.waitFor()
-    const heading = await this.getProductHeading()
-    return heading.includes('Products')
+  /**
+   * Select price high to low
+   */
+  async sortHighToLow() {
+    await this.filterDropdown.selectOption('hilo')
+  }
+
+  async getFirstProductPrice(): Promise<string> {
+    // const priceText = await this.productPrices.first().innerText()
+
+    // This handles cases where HTML is like: <div> $ \n 7.99 </div>
+    // return priceText.replace(/\n/g, '').trim()
+    return this.productPrices.first().innerText()
   }
 }

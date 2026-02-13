@@ -67,8 +67,8 @@ export class LoginPage {
     await this.page.waitForURL('https://www.saucedemo.com/inventory.html')
   }
   /**
-   * Get the flash message text (success or error)
-   * @returns The flash message text without the close button
+   * Get the error message text
+   * @returns The error message text
    */
   async getErrorMessage(): Promise<string> {
     const text = await this.ErrorMessage.textContent()
@@ -76,8 +76,8 @@ export class LoginPage {
   }
 
   /**
-   * Get the flash message text (success or error)
-   * @returns The flash message text without the close button
+   * Get the empty error message text
+   * @returns The empty error message text
    */
   async getEmptyErrorMessage(): Promise<string> {
     const text = await this.EmptyErrorMessage.textContent()
