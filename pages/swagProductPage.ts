@@ -38,10 +38,6 @@ export class ProductsPage {
   }
 
   async getFirstProductPrice(): Promise<string> {
-    // const priceText = await this.productPrices.first().innerText()
-
-    // This handles cases where HTML is like: <div> $ \n 7.99 </div>
-    // return priceText.replace(/\n/g, '').trim()
     return this.productPrices.first().innerText()
   }
 }
