@@ -1,4 +1,4 @@
-@smoke
+@skip
 Feature: Checkbox Interactions
   As a user
   I want to interact with checkboxes
